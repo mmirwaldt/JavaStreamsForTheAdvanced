@@ -17,8 +17,8 @@ public class Example_09_MapMulti {
         List<Object> intTree = List.of(1, List.of(2, 3), List.of(List.of(4, 5)));
         List<Integer> intList = intTree.stream()
                 .mapMultiToInt(Example_09_MapMulti::visit)
-                .boxed()
                 .limit(4)
+                .boxed()
                 .toList();
         System.out.println(intList);
     }
