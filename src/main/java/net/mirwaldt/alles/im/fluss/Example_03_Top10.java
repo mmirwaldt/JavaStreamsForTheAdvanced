@@ -20,21 +20,23 @@ import static java.util.stream.Collectors.*;
 public class Example_03_Top10 {
     public static void main(String[] args) throws IOException {
         // with one stream
-        final List<String> lines = Files.readAllLines(Path.of("Poem.txt"));
-        SortedMap<Long, List<String>> top10byOneStream =
-                lines.stream()
-                        .flatMap(line -> Arrays.stream(line.split("\\s+")))
-                        .collect(groupingBy(s -> s, counting()))
-                        .entrySet()
-                        .stream()
-                        .sorted(Comparator.<Map.Entry<String, Long>>comparingLong(Map.Entry::getValue).reversed())
-                        .limit(10)
-                        .collect(groupingBy(Map.Entry::getValue, () -> new TreeMap<>(reverseOrder()),
-                                mapping(Map.Entry::getKey, toList())));
+        List<String> lines = Files.readAllLines(Path.of("Poem.txt"));
+        SortedMap<Long, List<String>> top10byOneStream = lines.stream()
+                .filter(line -> !line.isEmpty())
+                .map(line -> line.replaceAll("[\\!|\\.|\\-|\\,]", ""))
+                .flatMap(line -> Arrays.stream(line.split("\\s+")))
+                .collect(groupingBy(s -> s, counting()))
+                .entrySet().stream()
+                .sorted((left, right) -> -Long.compare(left.getValue(), right.getValue()))
+                .limit(10)
+                .collect(groupingBy(Map.Entry::getValue, () -> new TreeMap<>(reverseOrder()),
+                        mapping(Map.Entry::getKey, toList())));
         System.out.println(top10byOneStream);
 
         // with several streams
         Map<String, Long> frequenciesByWord = lines.stream()
+                .filter(line -> !line.isEmpty())
+                .map(line -> line.replaceAll("[\\!|\\.|\\-|\\,]", ""))
                 .flatMap(line -> Arrays.stream(line.split("\\s+")))
                 .collect(groupingBy(s -> s, counting()));
 
@@ -54,7 +56,9 @@ public class Example_03_Top10 {
         System.out.println(top10byMaps);
 
         // with several streams and a record
-        record WordEntry(long frequency, String word) { }
+        record WordEntry(long frequency, String word) {
+        }
+
         SortedMap<Long, List<String>> top10byRecord = wordsByFrequency.entrySet().stream()
                 .flatMap(entry -> entry.getValue().stream()
                         .map(value -> new WordEntry(entry.getKey(), value)))
