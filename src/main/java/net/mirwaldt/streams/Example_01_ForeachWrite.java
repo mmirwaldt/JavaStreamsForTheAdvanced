@@ -7,7 +7,7 @@
  *  Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License</a>.
  */
 
-package net.mirwaldt.alles.im.fluss;
+package net.mirwaldt.streams;
 
 import java.util.ArrayList;
 import java.util.List;

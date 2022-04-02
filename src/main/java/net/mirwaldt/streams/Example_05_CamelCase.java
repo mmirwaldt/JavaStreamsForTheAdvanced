@@ -7,23 +7,19 @@
  *  Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License</a>.
  */
 
-package net.mirwaldt.alles.im.fluss;
+package net.mirwaldt.streams;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
-import java.util.ListIterator;
 
-public class Example_12_Iterator {
+import static java.util.stream.Collectors.joining;
+
+public class Example_05_CamelCase {
     public static void main(String[] args) {
-        List<Integer> ints = new ArrayList<>(Arrays.asList(1, 2, 3, 5, 6, 8, 9));
-        ListIterator<Integer> iterator = ints.listIterator();
-        int i = 1;
-        while (iterator.hasNext()) {
-            iterator.next();
-            if(i % 3 == 0) { iterator.remove(); }
-            i++;
-        }
-        System.out.println(ints);
+        String moduleName = "project-process-create-account";
+        String camelCaseName = Arrays.stream(moduleName.split("-"))
+                .skip(2)
+                .map(name -> name.substring(0, 1).toUpperCase() + name.substring(1))
+                .collect(joining()) + "Process"; // CreateAccountProcess
+        System.out.println(camelCaseName);
     }
 }

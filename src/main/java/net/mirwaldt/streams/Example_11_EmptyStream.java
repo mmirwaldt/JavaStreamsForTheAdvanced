@@ -7,19 +7,15 @@
  *  Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License</a>.
  */
 
-package net.mirwaldt.alles.im.fluss;
+package net.mirwaldt.streams;
 
-import java.util.List;
+import java.util.stream.Stream;
 
-public class Example_16_DebuggingWithPeek {
+public class Example_11_EmptyStream {
     public static void main(String[] args) {
-        var list = List.of(2, 3, 5, 7, 11, 13, 17, 19);
-        var result = list.stream()
-                .filter(i -> i < 14)
-                .peek(i -> System.out.println("after filter(): " + i))
-                .map(Integer::toBinaryString)
-                .peek(i -> System.out.println("after map(): " + i))
-                .toList();
-        System.out.println(result);
+        Stream<String> stream = Stream.<Integer>empty()
+                .filter(i -> i < 3)
+                .map(Integer::toBinaryString);
+        System.out.println(stream); // ReferencePipeline is created although useless for the empty stream
     }
 }

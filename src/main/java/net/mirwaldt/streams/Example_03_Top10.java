@@ -7,7 +7,7 @@
  *  Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License</a>.
  */
 
-package net.mirwaldt.alles.im.fluss;
+package net.mirwaldt.streams;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -20,7 +20,7 @@ import static java.util.stream.Collectors.*;
 public class Example_03_Top10 {
     public static void main(String[] args) throws IOException {
         // with one stream
-        List<String> lines = Files.readAllLines(Path.of("Poem.txt"));
+        List<String> lines = Files.readAllLines(Path.of("rhyme.txt"));
         SortedMap<Long, List<String>> top10byOneStream = lines.stream()
                 .filter(line -> !line.isEmpty())
                 .map(line -> line.replaceAll("[\\!|\\.|\\-|\\,]", ""))

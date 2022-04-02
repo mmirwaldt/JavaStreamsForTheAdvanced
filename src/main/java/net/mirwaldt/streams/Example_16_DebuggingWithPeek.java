@@ -7,19 +7,19 @@
  *  Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License</a>.
  */
 
-package net.mirwaldt.alles.im.fluss;
+package net.mirwaldt.streams;
 
-import java.util.Arrays;
+import java.util.List;
 
-import static java.util.stream.Collectors.joining;
-
-public class Example_05_CamelCase {
+public class Example_16_DebuggingWithPeek {
     public static void main(String[] args) {
-        String moduleName = "project-process-create-account";
-        String camelCaseName = Arrays.stream(moduleName.split("-"))
-                .skip(2)
-                .map(name -> name.substring(0, 1).toUpperCase() + name.substring(1))
-                .collect(joining()) + "Process"; // CreateAccountProcess
-        System.out.println(camelCaseName);
+        var list = List.of(2, 3, 5, 7, 11, 13, 17, 19);
+        var result = list.stream()
+                .filter(i -> i < 14)
+                .peek(i -> System.out.println("after filter(): " + i))
+                .map(Integer::toBinaryString)
+                .peek(i -> System.out.println("after map(): " + i))
+                .toList();
+        System.out.println(result);
     }
 }

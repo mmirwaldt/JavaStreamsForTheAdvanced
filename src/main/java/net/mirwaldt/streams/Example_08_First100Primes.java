@@ -7,16 +7,25 @@
  *  Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License</a>.
  */
 
-package net.mirwaldt.alles.im.fluss;
+package net.mirwaldt.streams;
 
-import java.util.stream.Stream;
+import java.util.stream.IntStream;
 
-public class Example_11_EmptyStream {
+public class Example_08_First100Primes {
     public static void main(String[] args) {
-        Stream<String> stream = Stream.<Integer>empty()
-                .filter(i -> i < 3)
-                .map(Integer::toBinaryString);
-        System.out.println(stream); // ReferencePipeline is created although useless for the empty stream
-        System.out.println(Stream.<Integer>empty() == Stream.<Integer>empty()); // result : false
+        var first100Primes = IntStream.iterate(2, i -> i + 1)
+                .filter(i -> isPrime(i))
+                .limit(100)
+                .boxed().toList();
+        System.out.println(first100Primes);
+    }
+
+    public static boolean isPrime(int n) {
+        for (int i = 2; i < n; i++) {
+            if(n % i == 0) {
+                return false;
+            }
+        }
+        return 1 < n;
     }
 }
