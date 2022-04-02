@@ -2,7 +2,7 @@
 
 ### What is this?
 
-This project includes slides and code examples of the presentations "Alles im Fluss - Java Streams für Fortgeschrittene" (German) and "Java Screams? Oh, you mean Java Streams! Java Streams for the advanced".
+This project includes the slides and the code examples of the presentations "Alles im Fluss - Java Streams für Fortgeschrittene" (German) and "Java Screams? Oh, you mean Java Streams! Java Streams for the advanced".
 
 ### Who owns the copyright for this project?
 
