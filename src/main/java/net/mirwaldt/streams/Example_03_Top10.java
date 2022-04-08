@@ -14,6 +14,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.*;
 
+import static java.lang.String.CASE_INSENSITIVE_ORDER;
 import static java.util.Collections.reverseOrder;
 import static java.util.stream.Collectors.*;
 
@@ -23,28 +24,33 @@ public class Example_03_Top10 {
         List<String> lines = Files.readAllLines(Path.of("rhyme.txt"));
         SortedMap<Long, List<String>> top10byOneStream = lines.stream()
                 .filter(line -> !line.isEmpty())
-                .map(line -> line.replaceAll("[\\!|\\.|\\-|\\,]", ""))
+                .map(line -> line.replaceAll("[\\!|\\.|\\-|\\,\\;]", ""))
                 .flatMap(line -> Arrays.stream(line.split("\\s+")))
-                .collect(groupingBy(s -> s, counting()))
+                .collect(groupingBy(s -> s, () -> new TreeMap<>(CASE_INSENSITIVE_ORDER), counting()))
                 .entrySet().stream()
                 .sorted((left, right) -> -Long.compare(left.getValue(), right.getValue()))
                 .limit(10)
                 .collect(groupingBy(Map.Entry::getValue, () -> new TreeMap<>(reverseOrder()),
                         mapping(Map.Entry::getKey, toList())));
-        System.out.println(top10byOneStream);
+        System.out.println("top10byOneStream=" + top10byOneStream);
+        System.out.println();
 
         // with several streams
         Map<String, Long> frequenciesByWord = lines.stream()
                 .filter(line -> !line.isEmpty())
-                .map(line -> line.replaceAll("[\\!|\\.|\\-|\\,]", ""))
+                .map(line -> line.replaceAll("[\\!|\\.|\\-|\\,\\;]", ""))
                 .flatMap(line -> Arrays.stream(line.split("\\s+")))
-                .collect(groupingBy(s -> s, counting()));
+                .collect(groupingBy(s -> s, () -> new TreeMap<>(CASE_INSENSITIVE_ORDER), counting()));
+        System.out.println("frequenciesByWord=" + frequenciesByWord);
+        System.out.println();
 
         SortedMap<Long, List<String>> wordsByFrequency =
                 frequenciesByWord.entrySet()
                         .stream()
                         .collect(groupingBy(Map.Entry::getValue, () -> new TreeMap<>(reverseOrder()),
                                 mapping(Map.Entry::getKey, toList())));
+        System.out.println("wordsByFrequency=" + wordsByFrequency);
+        System.out.println();
 
         SortedMap<Long, List<String>> top10byMaps =
                 wordsByFrequency.entrySet().stream()
@@ -53,7 +59,8 @@ public class Example_03_Top10 {
                         .limit(10)
                         .collect(groupingBy(Map.Entry::getKey, () -> new TreeMap<>(reverseOrder()),
                                 mapping(Map.Entry::getValue, toList())));
-        System.out.println(top10byMaps);
+        System.out.println("top10byMaps=" + top10byMaps);
+        System.out.println();
 
         // with several streams and a record
         record WordEntry(long frequency, String word) {
@@ -66,7 +73,6 @@ public class Example_03_Top10 {
                 .collect(groupingBy(WordEntry::frequency,
                         () -> new TreeMap<>(reverseOrder()),
                         mapping(WordEntry::word, toList())));
-
-        System.out.println(top10byRecord);
+        System.out.println("top10byRecord=" + top10byRecord);
     }
 }
