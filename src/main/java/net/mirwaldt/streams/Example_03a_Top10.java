@@ -13,22 +13,33 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.*;
-import java.util.function.Function;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import static java.lang.String.CASE_INSENSITIVE_ORDER;
 import static java.util.Collections.emptyMap;
 import static java.util.Collections.reverseOrder;
 import static java.util.stream.Collectors.*;
 
+/*
+    This variation of Example_03_Top10 does not just take the first elements of the last word list and ignores the rest
+    but includes all elements. This might lead to a top 10 with 11 elements because the 10th and 11th element have both
+    the same frequency.
+    E.g.
+    ...
+    top10={42=[the], 39=[swallowed], 38=[she], 23=[to], 21=[catch], 14=[a, fly, that], 13=[and], 12=[spider, wiggled]}
+    top09={42=[the], 39=[swallowed], 38=[she], 23=[to], 21=[catch], 14=[a, fly, that], 13=[and]}
+    top08={42=[the], 39=[swallowed], 38=[she], 23=[to], 21=[catch], 14=[a, fly, that]}
+    top07={42=[the], 39=[swallowed], 38=[she], 23=[to], 21=[catch], 14=[a, fly, that]}
+    top06={42=[the], 39=[swallowed], 38=[she], 23=[to], 21=[catch], 14=[a, fly, that]}
+    top05={42=[the], 39=[swallowed], 38=[she], 23=[to], 21=[catch]}
+    ...
+ */
 public class Example_03a_Top10 {
     public static void main(String[] args) throws IOException {
         // with one stream
         List<String> lines = Files.readAllLines(Path.of("rhyme.txt"));
         SortedMap<Long, List<String>> top10 = lines.stream()
                 .filter(line -> !line.isEmpty())
-                .map(line -> line.replaceAll("[\\!|\\.|\\-|\\,\\;]", ""))
+                .map(line -> line.replaceAll("[\\!|\\.|\\-|\\,|\\;]", ""))
                 .flatMap(line -> Arrays.stream(line.split("\\s+")))
                 .collect(groupingBy(s -> s, () -> new TreeMap<>(CASE_INSENSITIVE_ORDER), counting()))
                 .entrySet().stream()
@@ -47,7 +58,7 @@ public class Example_03a_Top10 {
         // with several streams
         Map<String, Long> frequenciesByWord = lines.stream()
                 .filter(line -> !line.isEmpty())
-                .map(line -> line.replaceAll("[\\!|\\.|\\-|\\,\\;]", ""))
+                .map(line -> line.replaceAll("[\\!|\\.|\\-|\\,|\\;]", ""))
                 .flatMap(line -> Arrays.stream(line.split("\\s+")))
                 .collect(groupingBy(s -> s, () -> new TreeMap<>(CASE_INSENSITIVE_ORDER), counting()));
         System.out.println("frequenciesByWord=" + frequenciesByWord);

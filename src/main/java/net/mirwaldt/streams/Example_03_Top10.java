@@ -24,7 +24,7 @@ public class Example_03_Top10 {
         List<String> lines = Files.readAllLines(Path.of("rhyme.txt"));
         SortedMap<Long, List<String>> top10byOneStream = lines.stream()
                 .filter(line -> !line.isEmpty())
-                .map(line -> line.replaceAll("[\\!|\\.|\\-|\\,\\;]", ""))
+                .map(line -> line.replaceAll("[\\!|\\.|\\-|\\,|\\;]", ""))
                 .flatMap(line -> Arrays.stream(line.split("\\s+")))
                 .collect(groupingBy(s -> s, () -> new TreeMap<>(CASE_INSENSITIVE_ORDER), counting()))
                 .entrySet().stream()
@@ -38,7 +38,7 @@ public class Example_03_Top10 {
         // with several streams
         Map<String, Long> frequenciesByWord = lines.stream()
                 .filter(line -> !line.isEmpty())
-                .map(line -> line.replaceAll("[\\!|\\.|\\-|\\,\\;]", ""))
+                .map(line -> line.replaceAll("[\\!|\\.|\\-|\\,|\\;]", ""))
                 .flatMap(line -> Arrays.stream(line.split("\\s+")))
                 .collect(groupingBy(s -> s, () -> new TreeMap<>(CASE_INSENSITIVE_ORDER), counting()));
         System.out.println("frequenciesByWord=" + frequenciesByWord);
