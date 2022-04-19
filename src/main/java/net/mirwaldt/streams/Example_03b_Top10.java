@@ -48,7 +48,7 @@ public class Example_03b_Top10 {
                         map -> map.keySet().stream()
                                 .map(map::headMap)
                                 .filter(headMap -> (10 <= headMap.values().stream().mapToLong(List::size).sum()))
-                                .findFirst().get()));
+                                .findFirst().orElse(map)));
         System.out.println("top10=" + top10);
         System.out.println();
 
@@ -73,7 +73,7 @@ public class Example_03b_Top10 {
                 wordsByFrequency.keySet().stream()
                         .map(wordsByFrequency::headMap)
                         .filter(headMap -> (10 <= headMap.values().stream().mapToLong(List::size).sum()))
-                        .findFirst().get();
+                        .findFirst().orElse(wordsByFrequency);
         System.out.println("onlyTop10=" + onlyTop10);
         System.out.println();
     }
