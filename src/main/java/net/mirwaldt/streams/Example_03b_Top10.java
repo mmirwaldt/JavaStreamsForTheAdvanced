@@ -71,12 +71,12 @@ public class Example_03b_Top10 {
         System.out.println("wordsByFrequency=" + wordsByFrequency);
         System.out.println();
 
-SortedMap<Long, List<String>> onlyTop10Plus =
-        wordsByFrequency.keySet().stream()
-                .map(wordsByFrequency::headMap)
-                .filter(headMap -> (10 <= headMap.values().stream().mapToLong(List::size).sum()))
-                .findFirst().orElse(wordsByFrequency);
-System.out.println("onlyTop10=" + onlyTop10Plus);
-System.out.println();
+        SortedMap<Long, List<String>> onlyTop10Plus =
+                wordsByFrequency.keySet().stream()
+                        .map(wordsByFrequency::headMap)
+                        .filter(headMap -> (10 <= headMap.values().stream().mapToLong(List::size).sum()))
+                        .findFirst().orElse(wordsByFrequency);
+        System.out.println("onlyTop10=" + onlyTop10Plus);
+        System.out.println();
     }
 }
