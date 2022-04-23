@@ -32,6 +32,8 @@ import static java.util.stream.Collectors.*;
     top06={42=[the], 39=[swallowed], 38=[she], 23=[to], 21=[catch], 14=[a, fly, that]}
     top05={42=[the], 39=[swallowed], 38=[she], 23=[to], 21=[catch]}
     ...
+
+    This was my first (flawed) attempt to find a solution.
  */
 public class Example_03a_Top10 {
     public static void main(String[] args) throws IOException {
