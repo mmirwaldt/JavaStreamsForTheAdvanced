@@ -39,7 +39,7 @@ public class Example_03a_Top10 {
     public static void main(String[] args) throws IOException {
         // with one stream
         List<String> lines = Files.readAllLines(Path.of("rhyme.txt"));
-        SortedMap<Long, List<String>> top10 = lines.stream()
+        SortedMap<Long, List<String>> top10Plus = lines.stream()
                 .filter(line -> !line.isEmpty())
                 .map(line -> line.replaceAll("[\\!|\\.|\\-|\\,|\\;]", ""))
                 .flatMap(line -> Arrays.stream(line.split("\\s+")))
@@ -53,7 +53,7 @@ public class Example_03a_Top10 {
                         (result, map) -> result.putAll((10 <= result.values().stream().mapToLong(List::size).sum())
                                 ? emptyMap() : map),
                         TreeMap::putAll);
-        System.out.println("top10=" + top10);
+        System.out.println("top10=" + top10Plus);
         System.out.println();
 
         // with several streams
@@ -73,7 +73,7 @@ public class Example_03a_Top10 {
         System.out.println("wordsByFrequency=" + wordsByFrequency);
         System.out.println();
 
-        SortedMap<Long, List<String>> onlyTop10 =
+        SortedMap<Long, List<String>> onlyTop10Plus =
                 wordsByFrequency.entrySet().stream()
                         .map(entry -> Map.of(entry.getKey(), entry.getValue()))
                         .collect(() -> new TreeMap<>(reverseOrder()),
@@ -81,7 +81,7 @@ public class Example_03a_Top10 {
                                         result.putAll((10 <= result.values().stream().mapToLong(List::size).sum())
                                                 ? emptyMap() : map),
                                 TreeMap::putAll);
-        System.out.println("onlyTop10=" + onlyTop10);
+        System.out.println("onlyTop10=" + onlyTop10Plus);
         System.out.println();
     }
 }

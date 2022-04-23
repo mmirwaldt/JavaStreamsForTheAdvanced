@@ -39,7 +39,7 @@ public class Example_03b_Top10 {
     public static void main(String[] args) throws IOException {
         // with one stream
         List<String> lines = Files.readAllLines(Path.of("rhyme.txt"));
-        SortedMap<Long, List<String>> top10 = lines.stream()
+        SortedMap<Long, List<String>> top10Plus = lines.stream()
                 .filter(line -> !line.isEmpty())
                 .map(line -> line.replaceAll("[\\!|\\.|\\-|\\,|\\;]", ""))
                 .flatMap(line -> Arrays.stream(line.split("\\s+")))
@@ -51,7 +51,7 @@ public class Example_03b_Top10 {
                                 .map(map::headMap)
                                 .filter(headMap -> (10 <= headMap.values().stream().mapToLong(List::size).sum()))
                                 .findFirst().orElse(map)));
-        System.out.println("top10=" + top10);
+        System.out.println("top10=" + top10Plus);
         System.out.println();
 
         // with several streams
@@ -71,12 +71,12 @@ public class Example_03b_Top10 {
         System.out.println("wordsByFrequency=" + wordsByFrequency);
         System.out.println();
 
-        SortedMap<Long, List<String>> onlyTop10 =
-                wordsByFrequency.keySet().stream()
-                        .map(wordsByFrequency::headMap)
-                        .filter(headMap -> (10 <= headMap.values().stream().mapToLong(List::size).sum()))
-                        .findFirst().orElse(wordsByFrequency);
-        System.out.println("onlyTop10=" + onlyTop10);
-        System.out.println();
+SortedMap<Long, List<String>> onlyTop10Plus =
+        wordsByFrequency.keySet().stream()
+                .map(wordsByFrequency::headMap)
+                .filter(headMap -> (10 <= headMap.values().stream().mapToLong(List::size).sum()))
+                .findFirst().orElse(wordsByFrequency);
+System.out.println("onlyTop10=" + onlyTop10Plus);
+System.out.println();
     }
 }
