@@ -52,8 +52,7 @@ public class Example_03a_Top10 {
                 .collect(() -> new TreeMap<>(reverseOrder()),
                         (result, map) -> result.putAll((10 <= result.values().stream().mapToLong(List::size).sum())
                                 ? emptyMap() : map),
-                        (a, b) -> {
-                        });
+                        TreeMap::putAll);
         System.out.println("top10=" + top10);
         System.out.println();
 
@@ -81,8 +80,7 @@ public class Example_03a_Top10 {
                                 (result, map) ->
                                         result.putAll((10 <= result.values().stream().mapToLong(List::size).sum())
                                                 ? emptyMap() : map),
-                                (a, b) -> {
-                                });
+                                TreeMap::putAll);
         System.out.println("onlyTop10=" + onlyTop10);
         System.out.println();
     }
