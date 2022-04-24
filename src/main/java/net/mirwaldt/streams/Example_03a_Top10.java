@@ -50,8 +50,7 @@ public class Example_03a_Top10 {
                 .entrySet().stream()
                 .map(entry -> Map.of(entry.getKey(), entry.getValue()))
                 .collect(() -> new TreeMap<>(reverseOrder()),
-                        (result, map) -> result.putAll((10 <= result.values().stream().mapToLong(List::size).sum())
-                                ? emptyMap() : map),
+                        (result, map) -> result.putAll((10 <= sumSizesOfValues(result)) ? emptyMap() : map),
                         TreeMap::putAll);
         System.out.println("top10=" + top10Plus);
         System.out.println();
@@ -77,11 +76,13 @@ public class Example_03a_Top10 {
                 wordsByFrequency.entrySet().stream()
                         .map(entry -> Map.of(entry.getKey(), entry.getValue()))
                         .collect(() -> new TreeMap<>(reverseOrder()),
-                                (result, map) ->
-                                        result.putAll((10 <= result.values().stream().mapToLong(List::size).sum())
-                                                ? emptyMap() : map),
+                                (result, map) -> result.putAll((10 <= sumSizesOfValues(result)) ? emptyMap() : map),
                                 TreeMap::putAll);
         System.out.println("onlyTop10=" + onlyTop10Plus);
         System.out.println();
+    }
+
+    public static long sumSizesOfValues(SortedMap<Long, List<String>> map) {
+        return map.values().stream().mapToLong(List::size).sum();
     }
 }

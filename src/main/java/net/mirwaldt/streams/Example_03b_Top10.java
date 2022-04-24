@@ -49,7 +49,7 @@ public class Example_03b_Top10 {
                                 mapping(Map.Entry::getKey, toList())),
                         map -> map.keySet().stream()
                                 .map(map::headMap)
-                                .filter(headMap -> (10 <= headMap.values().stream().mapToLong(List::size).sum()))
+                                .filter(headMap -> (10 <= sumSizesOfValues(headMap)))
                                 .findFirst().orElse(map)));
         System.out.println("top10=" + top10Plus);
         System.out.println();
@@ -74,9 +74,13 @@ public class Example_03b_Top10 {
         SortedMap<Long, List<String>> onlyTop10Plus =
                 wordsByFrequency.keySet().stream()
                         .map(wordsByFrequency::headMap)
-                        .filter(headMap -> (10 <= headMap.values().stream().mapToLong(List::size).sum()))
+                        .filter(headMap -> (10 <= sumSizesOfValues(headMap)))
                         .findFirst().orElse(wordsByFrequency);
         System.out.println("onlyTop10=" + onlyTop10Plus);
         System.out.println();
+    }
+
+    public static long sumSizesOfValues(SortedMap<Long, List<String>> map) {
+        return map.values().stream().mapToLong(List::size).sum();
     }
 }
