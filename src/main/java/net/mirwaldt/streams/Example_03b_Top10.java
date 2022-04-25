@@ -50,7 +50,8 @@ public class Example_03b_Top10 {
                         map -> map.keySet().stream()
                                 .map(map::headMap)
                                 .filter(headMap -> (10 <= sumSizesOfValues(headMap)))
-                                .findFirst().orElse(map)));
+                                .map(TreeMap::new)
+                                .findFirst().orElse(new TreeMap<>(map))));
         System.out.println("top10=" + top10Plus);
         System.out.println();
 
@@ -75,7 +76,8 @@ public class Example_03b_Top10 {
                 wordsByFrequency.keySet().stream()
                         .map(wordsByFrequency::headMap)
                         .filter(headMap -> (10 <= sumSizesOfValues(headMap)))
-                        .findFirst().orElse(wordsByFrequency);
+                        .map(TreeMap::new)
+                        .findFirst().orElse(new TreeMap<>(wordsByFrequency));
         System.out.println("onlyTop10=" + onlyTop10Plus);
         System.out.println();
     }
