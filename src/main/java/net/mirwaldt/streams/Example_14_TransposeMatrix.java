@@ -11,7 +11,7 @@ package net.mirwaldt.streams;
 
 import java.util.Arrays;
 
-public class Example_13_TransposeMatrix {
+public class Example_14_TransposeMatrix {
     public static void main(String[] args) {
         int[][] matrix = new int[][]{{1, 2, 3}, {4, 5, 6}, {7, 8, 9}};
 

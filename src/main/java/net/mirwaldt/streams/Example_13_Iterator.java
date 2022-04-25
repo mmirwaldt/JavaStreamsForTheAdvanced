@@ -9,23 +9,21 @@
 
 package net.mirwaldt.streams;
 
-import java.util.stream.IntStream;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.ListIterator;
 
-public class Example_08_First100Primes {
+public class Example_13_Iterator {
     public static void main(String[] args) {
-        var first100Primes = IntStream.iterate(2, i -> i + 1)
-                .filter(i -> isPrime(i))
-                .limit(100)
-                .boxed().toList();
-        System.out.println(first100Primes);
-    }
-
-    public static boolean isPrime(int n) {
-        for (int i = 2; i < n; i++) {
-            if(n % i == 0) {
-                return false;
-            }
+        List<Integer> ints = new ArrayList<>(Arrays.asList(1, 2, 3, 5, 6, 8, 9));
+        ListIterator<Integer> iterator = ints.listIterator();
+        int i = 1;
+        while (iterator.hasNext()) {
+            iterator.next();
+            if(i % 3 == 0) { iterator.remove(); }
+            i++;
         }
-        return 1 < n;
+        System.out.println(ints);
     }
 }

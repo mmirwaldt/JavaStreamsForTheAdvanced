@@ -17,23 +17,23 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class Example_14_Fibonacci_Test {
     @Test
     void test_fibonacciByLoop() {
-        Assertions.assertEquals(0, Example_14_Fibonacci.fibonacciByLoop(0));
-        Assertions.assertEquals(1, Example_14_Fibonacci.fibonacciByLoop(1));
-        Assertions.assertEquals(1, Example_14_Fibonacci.fibonacciByLoop(2));
-        Assertions.assertEquals(2, Example_14_Fibonacci.fibonacciByLoop(3));
-        Assertions.assertEquals(3, Example_14_Fibonacci.fibonacciByLoop(4));
-        Assertions.assertEquals(5, Example_14_Fibonacci.fibonacciByLoop(5));
-        Assertions.assertEquals(8, Example_14_Fibonacci.fibonacciByLoop(6));
+        Assertions.assertEquals(0, Example_15_Fibonacci.fibonacciByLoop(0));
+        Assertions.assertEquals(1, Example_15_Fibonacci.fibonacciByLoop(1));
+        Assertions.assertEquals(1, Example_15_Fibonacci.fibonacciByLoop(2));
+        Assertions.assertEquals(2, Example_15_Fibonacci.fibonacciByLoop(3));
+        Assertions.assertEquals(3, Example_15_Fibonacci.fibonacciByLoop(4));
+        Assertions.assertEquals(5, Example_15_Fibonacci.fibonacciByLoop(5));
+        Assertions.assertEquals(8, Example_15_Fibonacci.fibonacciByLoop(6));
     }
 
     @Test
     void test_fibonacciByStream() {
-        Assertions.assertEquals(0, Example_14_Fibonacci.fibonacciByStream(0));
-        Assertions.assertEquals(1, Example_14_Fibonacci.fibonacciByStream(1));
-        Assertions.assertEquals(1, Example_14_Fibonacci.fibonacciByStream(2));
-        Assertions.assertEquals(2, Example_14_Fibonacci.fibonacciByStream(3));
-        Assertions.assertEquals(3, Example_14_Fibonacci.fibonacciByStream(4));
-        Assertions.assertEquals(5, Example_14_Fibonacci.fibonacciByStream(5));
-        Assertions.assertEquals(8, Example_14_Fibonacci.fibonacciByStream(6));
+        Assertions.assertEquals(0, Example_15_Fibonacci.fibonacciByStream(0));
+        Assertions.assertEquals(1, Example_15_Fibonacci.fibonacciByStream(1));
+        Assertions.assertEquals(1, Example_15_Fibonacci.fibonacciByStream(2));
+        Assertions.assertEquals(2, Example_15_Fibonacci.fibonacciByStream(3));
+        Assertions.assertEquals(3, Example_15_Fibonacci.fibonacciByStream(4));
+        Assertions.assertEquals(5, Example_15_Fibonacci.fibonacciByStream(5));
+        Assertions.assertEquals(8, Example_15_Fibonacci.fibonacciByStream(6));
     }
 }

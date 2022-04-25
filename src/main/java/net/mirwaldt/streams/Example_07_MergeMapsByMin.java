@@ -16,7 +16,7 @@ import java.util.stream.Stream;
 
 import static java.util.stream.Collectors.toMap;
 
-public class Example_07a_MergeMapsByMin {
+public class Example_07_MergeMapsByMin {
     public static void main(String[] args) {
         SortedMap<Integer, Integer> leftMap = new TreeMap<>(Map.of(1, 3, 2, 1, 3, 4));
         SortedMap<Integer, Integer> rightMap = new TreeMap<>(Map.of(1, 2, 2, 3, 3, 4));

@@ -9,17 +9,23 @@
 
 package net.mirwaldt.streams;
 
-import java.util.List;
+import java.util.stream.IntStream;
 
-public class Example_16_DebuggingWithPeek {
+public class Example_09_First100Primes {
     public static void main(String[] args) {
-        var list = List.of(2, 3, 5, 7, 11, 13, 17, 19);
-        var result = list.stream()
-                .filter(i -> i < 14)
-                .peek(i -> System.out.println("after filter(): " + i))
-                .map(Integer::toBinaryString)
-                .peek(i -> System.out.println("after map(): " + i))
-                .toList();
-        System.out.println(result);
+        var first100Primes = IntStream.iterate(2, i -> i + 1)
+                .filter(i -> isPrime(i))
+                .limit(100)
+                .boxed().toList();
+        System.out.println(first100Primes);
+    }
+
+    public static boolean isPrime(int n) {
+        for (int i = 2; i < n; i++) {
+            if(n % i == 0) {
+                return false;
+            }
+        }
+        return 1 < n;
     }
 }

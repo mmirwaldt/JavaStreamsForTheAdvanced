@@ -11,22 +11,15 @@ package net.mirwaldt.streams;
 
 import java.util.List;
 
-public class Example_10_BadForeach {
+public class Example_17_DebuggingWithPeek {
     public static void main(String[] args) {
-        List<Integer> ints = List.of(1,2,3,5,6,8,9);
-
-        // flawed
-        System.out.println("-".repeat(120));
-        ints.stream().forEach(i -> {
-            System.out.println(i);
-            System.out.println("-".repeat(120));
-        });
-
-        // better
-        System.out.println("-".repeat(120));
-        for (Integer i : ints) {
-            System.out.println(i);
-            System.out.println("-".repeat(120));
-        }
+        var list = List.of(2, 3, 5, 7, 11, 13, 17, 19);
+        var result = list.stream()
+                .filter(i -> i < 14)
+                .peek(i -> System.out.println("after filter(): " + i))
+                .map(Integer::toBinaryString)
+                .peek(i -> System.out.println("after map(): " + i))
+                .toList();
+        System.out.println(result);
     }
 }

@@ -9,21 +9,24 @@
 
 package net.mirwaldt.streams;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.ListIterator;
 
-public class Example_12_Iterator {
+public class Example_11_BadForeach {
     public static void main(String[] args) {
-        List<Integer> ints = new ArrayList<>(Arrays.asList(1, 2, 3, 5, 6, 8, 9));
-        ListIterator<Integer> iterator = ints.listIterator();
-        int i = 1;
-        while (iterator.hasNext()) {
-            iterator.next();
-            if(i % 3 == 0) { iterator.remove(); }
-            i++;
+        List<Integer> ints = List.of(1,2,3,5,6,8,9);
+
+        // flawed
+        System.out.println("-".repeat(120));
+        ints.stream().forEach(i -> {
+            System.out.println(i);
+            System.out.println("-".repeat(120));
+        });
+
+        // better
+        System.out.println("-".repeat(120));
+        for (Integer i : ints) {
+            System.out.println(i);
+            System.out.println("-".repeat(120));
         }
-        System.out.println(ints);
     }
 }

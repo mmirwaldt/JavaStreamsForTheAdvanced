@@ -11,7 +11,7 @@ package net.mirwaldt.streams;
 
 import java.util.stream.Stream;
 
-public class Example_11_EmptyStream {
+public class Example_12_EmptyStream {
     public static void main(String[] args) {
         Stream<String> stream = Stream.<Integer>empty()
                 .filter(i -> i < 3)

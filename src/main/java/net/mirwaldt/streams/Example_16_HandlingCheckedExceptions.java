@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.function.Function;
 import java.util.stream.Stream;
 
-public class Example_15_HandlingCheckedExceptions {
+public class Example_16_HandlingCheckedExceptions {
     public static void main(String[] args) {
         List<URL> urlsFromSneakyThrow = Stream.of("http://www.wikipedia.de", "http://www.mozilla.org/")
                 .map(sneakyThrow(URL::new))

@@ -11,7 +11,7 @@ package net.mirwaldt.streams;
 
 import java.util.stream.IntStream;
 
-public class Example_14_Fibonacci {
+public class Example_15_Fibonacci {
     public static void main(String[] args) {
         System.out.println("fibonacciByStream(6)=" + fibonacciByStream(6));
         System.out.println("fibonacciByLoop(6)=" + fibonacciByLoop(6));

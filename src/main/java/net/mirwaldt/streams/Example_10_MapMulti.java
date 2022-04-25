@@ -12,11 +12,11 @@ package net.mirwaldt.streams;
 import java.util.List;
 import java.util.function.IntConsumer;
 
-public class Example_09_MapMulti {
+public class Example_10_MapMulti {
     public static void main(String[] args) {
         List<Object> intTree = List.of(1, List.of(2, 3), List.of(List.of(4, 5)));
         List<Integer> intList = intTree.stream()
-                .mapMultiToInt(Example_09_MapMulti::visit)
+                .mapMultiToInt(Example_10_MapMulti::visit)
                 .limit(4)
                 .boxed()
                 .toList();
