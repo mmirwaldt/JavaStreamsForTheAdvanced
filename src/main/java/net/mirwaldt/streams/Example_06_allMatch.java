@@ -23,10 +23,10 @@ public class Example_06_allMatch {
                     .mapToInt(Integer::parseInt)
                     .sum();
         } else {
-            String nonInt = intsAsStrings.stream()
+            String nonPositiveInt = intsAsStrings.stream()
                     .filter(str -> !str.matches("\\d+"))
                     .findFirst().get();
-            throw new IllegalArgumentException("'" + nonInt + "' is not a positive integer.");
+            throw new IllegalArgumentException("'" + nonPositiveInt + "' is not a positive integer.");
         }
     }
 }
